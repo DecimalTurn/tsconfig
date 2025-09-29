@@ -13,10 +13,21 @@ interface Test {
 }
 
 describe('tsconfig', function () {
+  
+  const nodeMajor = Number(process.version.match(/v(\d+)/)[1]);
+  let invalidJsonError;
+  if (nodeMajor >= 20) {
+    invalidJsonError = "Unexpected token 's', \"some random string\" is not valid JSON";
+  } else if (nodeMajor >= 6) {
+    invalidJsonError = 'Unexpected token s in JSON at position 0';
+  } else {
+    invalidJsonError = 'Unexpected token s';
+  }
+
   const tests: Test[] = [
     {
       args: [TEST_DIR, 'invalidfile'],
-      error: parseInt(process.versions.node, 10) > 5 ? 'Unexpected token s in JSON at position 0' : 'Unexpected token s'
+      error: invalidJsonError
     },
     {
       args: [TEST_DIR, 'missing'],

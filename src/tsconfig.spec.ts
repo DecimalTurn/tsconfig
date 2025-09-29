@@ -13,15 +13,15 @@ interface Test {
 }
 
 describe('tsconfig', function () {
-  
-  const nodeMajor = Number(process.version.match(/v(\d+)/)[1]);
-  let invalidJsonError;
+
+  const nodeMajor = Number(process.version.match(/v(\d+)/)[1])
+  let invalidJsonError
   if (nodeMajor >= 20) {
-    invalidJsonError = "Unexpected token 's', \"some random string\" is not valid JSON";
+    invalidJsonError = "Unexpected token 's', \"some random string\" is not valid JSON"
   } else if (nodeMajor >= 6) {
-    invalidJsonError = 'Unexpected token s in JSON at position 0';
+    invalidJsonError = 'Unexpected token s in JSON at position 0'
   } else {
-    invalidJsonError = 'Unexpected token s';
+    invalidJsonError = 'Unexpected token s'
   }
 
   const tests: Test[] = [

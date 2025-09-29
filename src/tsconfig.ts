@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import stripBom = require('strip-bom')
-import stripComments = require('strip-json-comments')
+const stripJsonComments = require('strip-json-comments');
 
 export interface LoadResult {
   path?: string
@@ -185,7 +185,7 @@ export function readFileSync (filename: string): any {
  * Parse `tsconfig.json` file.
  */
 export function parse (contents: string, filename: string) {
-  const data = stripComments(stripBom(contents))
+  const data = stripJsonComments(stripBom(contents), { trailingCommas: true })
 
   // A tsconfig.json file is permitted to be completely empty.
   if (/^\s*$/.test(data)) {

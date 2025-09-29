@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import stripBom = require('strip-bom')
-const stripJsonComments = require('strip-json-comments');
+import stripJsonComments from 'strip-json-comments'
 
 export interface LoadResult {
   path?: string

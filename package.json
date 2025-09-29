@@ -49,9 +49,9 @@
     "strip-json-comments": "^5.0.0"
   },
   "devDependencies": {
-    "@types/chai": "4.0.4",
-    "@types/mocha": "^2.2.42",
-    "@types/node": "8.0.25",
+    "@types/chai": "~4.0.4",
+    "@types/mocha": "~2.2.42",
+    "@types/node": "~8.0.25",
     "bluebird": "^3.4.1",
     "chai": "^3.0.0",
     "istanbul": "^0.4.0",

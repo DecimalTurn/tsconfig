@@ -1,6 +1,6 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import stripBom from 'strip-bom'
+import stripBom = require('strip-bom')
 
 // We'll import this from a separate module that handles the dynamic import
 import { getStripJsonComments } from './strip-json-comments-loader'

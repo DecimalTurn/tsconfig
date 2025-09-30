@@ -35,13 +35,13 @@ function loadStripJsonCommentsSync () {
     if (done) {
       return false // Exit loop
     }
-    
+
     // Check for timeout
     if (Date.now() - startTime > TIMEOUT_MS) {
       error = new Error(`Timeout loading strip-json-comments after ${TIMEOUT_MS}ms`)
       return false // Exit loop
     }
-    
+
     return true // Continue looping
   })
 

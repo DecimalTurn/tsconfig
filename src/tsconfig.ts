@@ -2,8 +2,20 @@ import * as fs from 'fs'
 import * as path from 'path'
 import stripBom = require('strip-bom')
 
-// We'll import this from a separate module that handles the dynamic import
-import { getStripJsonComments } from './strip-json-comments-loader'
+// Check Node.js version and use appropriate method
+const nodeVersion = parseInt(process.version.slice(1).split('.')[0], 10)
+let getStripJsonComments: () => (input: string, options?: any) => string
+
+if (nodeVersion >= 22) {
+  // For Node 22+, can directly require ESM modules
+  const stripJsonCommentsModule = require('strip-json-comments')
+  const stripJsonComments = stripJsonCommentsModule.default
+  getStripJsonComments = () => stripJsonComments
+} else {
+  // For older versions of Node.js, use our deasync-based loader
+  const { getStripJsonComments: getStripJsonCommentsLoader } = require('./strip-json-comments-loader')
+  getStripJsonComments = getStripJsonCommentsLoader
+}
 
 export interface LoadResult {
   path?: string

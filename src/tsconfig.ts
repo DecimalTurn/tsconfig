@@ -1,7 +1,9 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import stripBom = require('strip-bom')
-import stripJsonComments from 'strip-json-comments'
+import stripBom from 'strip-bom'
+
+// We'll import this from a separate module that handles the dynamic import
+import { getStripJsonComments } from './strip-json-comments-loader'
 
 export interface LoadResult {
   path?: string
@@ -185,6 +187,7 @@ export function readFileSync (filename: string): any {
  * Parse `tsconfig.json` file.
  */
 export function parse (contents: string, filename: string) {
+  const stripJsonComments = getStripJsonComments()
   const data = stripJsonComments(stripBom(contents), { trailingCommas: true })
 
   // A tsconfig.json file is permitted to be completely empty.

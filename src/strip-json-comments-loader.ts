@@ -17,8 +17,9 @@ function loadStripJsonCommentsSync () {
   let result: any = null
   let error: any = null
   let done = false
+  const startTime = Date.now()
+  const TIMEOUT_MS = 10000 // 10 second timeout
 
-  // Use Function constructor instead of eval - cleaner and more explicit
   const dynamicImport = new Function('moduleName', 'return import(moduleName)')
 
   dynamicImport('strip-json-comments').then((m: any) => {
@@ -29,8 +30,20 @@ function loadStripJsonCommentsSync () {
     done = true
   })
 
-  // Wait for the async operation to complete
-  deasync.loopWhile(() => !done)
+  // Wait for the async operation to complete with timeout protection
+  deasync.loopWhile(() => {
+    if (done) {
+      return false // Exit loop
+    }
+    
+    // Check for timeout
+    if (Date.now() - startTime > TIMEOUT_MS) {
+      error = new Error(`Timeout loading strip-json-comments after ${TIMEOUT_MS}ms`)
+      return false // Exit loop
+    }
+    
+    return true // Continue looping
+  })
 
   if (error) {
     throw error

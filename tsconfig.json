@@ -9,7 +9,5 @@
     "noImplicitAny": true,
     "removeComments": true,
     "sourceMap": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
   }
 }

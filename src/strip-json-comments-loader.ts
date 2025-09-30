@@ -18,9 +18,8 @@ function loadStripJsonCommentsSync () {
   let error: any = null
   let done = false
 
-  // Use eval to prevent TypeScript from transforming the dynamic import
-  // tslint:disable-next-line:no-eval
-  const dynamicImport = eval('(moduleName) => import(moduleName)')
+  // Use Function constructor instead of eval - cleaner and more explicit
+  const dynamicImport = new Function('moduleName', 'return import(moduleName)')
 
   dynamicImport('strip-json-comments').then((m: any) => {
     result = m.default

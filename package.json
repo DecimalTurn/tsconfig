@@ -45,17 +45,16 @@
   "homepage": "https://github.com/TypeStrong/tsconfig",
   "dependencies": {
     "@types/strip-bom": "^3.0.0",
+    "import-sync": "^2.2.3",
     "strip-bom": "^3.0.0",
     "strip-json-comments": "^5.0.0"
   },
   "devDependencies": {
     "@types/chai": "~4.0.4",
-    "@types/deasync": "^0.1.5",
     "@types/mocha": "~2.2.42",
     "@types/node": "~8.0.25",
     "bluebird": "^3.4.1",
     "chai": "^3.0.0",
-    "deasync": "^0.1.30",
     "istanbul": "^0.4.0",
     "mocha": "^3.2.0",
     "tslint": "^4.5.1",
